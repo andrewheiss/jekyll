@@ -43,7 +43,17 @@ module Jekyll
     end
 
     def render_pygments(context, code)
-      output = add_code_tags(Albino.new(code, @lang).to_s(@options), @lang)
+      if cache_dir = context.registers[:site].pygments_cache
+        path = File.join(cache_dir, "#{@lang}-#{Digest::MD5.hexdigest(code)}.html")
+        if File.exist?(path)
+          output = File.read(path)
+        else
+          output = add_code_tags(Albino.new(code, @lang).to_s(@options), @lang)
+          File.open(path, 'w') {|f| f.print(output) }
+        end
+      else
+        output = add_code_tags(Albino.new(code, @lang).to_s(@options), @lang)
+      end
       output = context["pygments_prefix"] + output if context["pygments_prefix"]
       output = output + context["pygments_suffix"] if context["pygments_suffix"]
       output

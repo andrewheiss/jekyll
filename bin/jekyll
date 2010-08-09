@@ -47,6 +47,10 @@ opts = OptionParser.new do |opts|
   opts.on("--pygments", "Use pygments to highlight code") do
     options['pygments'] = true
   end
+  
+  opts.on("--pygments-cache", "Path to cache pygments output in, for faster re-rendering") do |path|
+    options['pygments_cache'] = path
+  end
 
   opts.on("--rdiscount", "Use rdiscount gem for Markdown") do
     options['markdown'] = 'rdiscount'

@@ -3,7 +3,8 @@ module Jekyll
   class Site
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :source, :dest, :lsi, :pygments,
-                  :permalink_style, :tags, :time, :future, :safe, :plugins
+                  :pygments_cache,  :permalink_style, :tags, :time, :future,
+                  :safe, :plugins
     attr_accessor :converters, :generators
 
     # Initialize the site
@@ -19,6 +20,7 @@ module Jekyll
       self.plugins         = File.expand_path(config['plugins'])
       self.lsi             = config['lsi']
       self.pygments        = config['pygments']
+      self.pygments_cache  = config['pygments_cache']
       self.permalink_style = config['permalink'].to_sym
       self.exclude         = config['exclude'] || []
       self.future          = config['future']
@@ -39,6 +41,12 @@ module Jekyll
 
     def setup
       require 'classifier' if self.lsi
+
+      if self.pygments_cache
+        require 'fileutils'
+        FileUtils.mkdir_p(pygments_cache)
+        require 'digest/md5'
+      end
 
       # If safe mode is off, load in any ruby files under the plugins
       # directory.
