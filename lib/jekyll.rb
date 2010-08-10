@@ -33,6 +33,7 @@ require 'jekyll/page'
 require 'jekyll/post'
 require 'jekyll/filters'
 require 'jekyll/albino'
+require 'jekyll/sorter'
 require 'jekyll/static_file'
 require 'jekyll/errors'
 

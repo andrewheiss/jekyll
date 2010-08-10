@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('classifier', [">= 1.3.1"])
   s.add_runtime_dependency('directory_watcher', [">= 1.1.1"])
   s.add_runtime_dependency('maruku', [">= 0.5.9"])
+  s.add_runtime_dependency('rbtree', [">= 0.2.1"])
 
   s.add_development_dependency('redgreen', [">= 4.2.1"])
   s.add_development_dependency('shoulda', [">= 4.2.1"])
@@ -76,6 +77,7 @@ Gem::Specification.new do |s|
     lib/jekyll/plugin.rb
     lib/jekyll/post.rb
     lib/jekyll/site.rb
+    lib/jekyll/sorter.rb
     lib/jekyll/static_file.rb
     lib/jekyll/tags/highlight.rb
     lib/jekyll/tags/include.rb
